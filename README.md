@@ -8,7 +8,7 @@
 
 [![CI](https://github.com/a27259954/adbridge/actions/workflows/ci.yml/badge.svg)](https://github.com/a27259954/adbridge/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/a27259954/adbridge?sort=semver)](https://github.com/a27259954/adbridge/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/a27259954/adbridge/total)](https://github.com/a27259954/adbridge/releases)
+[![Downloads](https://img.shields.io/github/downloads/a27259954/adbridge/total?color=blue)](https://github.com/a27259954/adbridge/releases)
 [![Go](https://img.shields.io/github/go-mod/go-version/a27259954/adbridge)](go.mod)
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0078D6)](#requirements)
 [![MCP](https://img.shields.io/badge/MCP-Streamable%20HTTP-6E56CF)](docs/mcp-tools.md)
