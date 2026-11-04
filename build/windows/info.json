@@ -1,0 +1,15 @@
+{
+	"fixed": {
+		"file_version": "0.1.0"
+	},
+	"info": {
+		"0000": {
+			"ProductVersion": "0.1.0",
+			"CompanyName": "a27259954",
+			"FileDescription": "Multi-device ADB bridge with MCP server for AI debugging",
+			"LegalCopyright": "© 2026 a27259954",
+			"ProductName": "adbridge",
+			"Comments": "adbridge"
+		}
+	}
+}

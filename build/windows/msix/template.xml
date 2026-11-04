@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MsixPackagingToolTemplate
+    xmlns="http://schemas.microsoft.com/msix/packaging/msixpackagingtool/template/2022">
+    <Settings
+        AllowTelemetry="false"
+        ApplyACLsToPackageFiles="true"
+        GenerateCommandLineFile="true"
+        AllowPromptForPassword="false">
+    </Settings>
+    <Installer
+        Path="adbridge.exe"
+        Arguments=""
+        InstallLocation="C:\Program Files\a27259954\adbridge">
+    </Installer>
+    <PackageInformation
+        PackageName="adbridge"
+        PackageDisplayName="adbridge"
+        PublisherName="CN=a27259954"
+        PublisherDisplayName="a27259954"
+        Version="0.1.0.0"
+        PackageDescription="Multi-device ADB bridge with MCP server for AI debugging">
+        <Capabilities>
+            <Capability Name="runFullTrust" />
+            
+        </Capabilities>
+        <Applications>
+            <Application
+                Id="io.github.a27259954.adbridge"
+                Description="Multi-device ADB bridge with MCP server for AI debugging"
+                DisplayName="adbridge"
+                ExecutableName="adbridge.exe"
+                EntryPoint="Windows.FullTrustApplication">
+                
+            </Application>
+        </Applications>
+        <Resources>
+            <Resource Language="en-us" />
+        </Resources>
+        <Dependencies>
+            <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
+        </Dependencies>
+        <Properties>
+            <Framework>false</Framework>
+            <DisplayName>adbridge</DisplayName>
+            <PublisherDisplayName>a27259954</PublisherDisplayName>
+            <Description>Multi-device ADB bridge with MCP server for AI debugging</Description>
+            <Logo>Assets\AppIcon.png</Logo>
+        </Properties>
+    </PackageInformation>
+    <SaveLocation PackagePath="adbridge.msix" />
+    <PackageIntegrity>
+        <CertificatePath></CertificatePath>
+    </PackageIntegrity>
+</MsixPackagingToolTemplate>

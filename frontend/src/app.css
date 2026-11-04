@@ -1,0 +1,120 @@
+/* Design tokens. Dark is the default; light follows the OS. */
+:root {
+  --bg: #111317;
+  --bg-1: #16191e;
+  --bg-2: #1c2026;
+  --bg-3: #242930;
+  --line: #2a2f37;
+  --line-2: #353b45;
+  --fg: #d7dbe0;
+  --fg-1: #a4abb5;
+  --fg-2: #6f7782;
+  --accent: #4c9bff;
+  --accent-bg: #1d3350;
+  --ok: #3fb950;
+  --warn: #d29922;
+  --err: #f0524f;
+  --fatal: #d06cf5;
+  --debug: #6cb6ff;
+  --sel: #1f2a38;
+
+  --font: "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+  --mono: "Cascadia Mono", "JetBrains Mono", Consolas, monospace;
+  --fs: 12.5px;
+  --fs-s: 11.5px;
+  --r: 5px;
+  --row: 26px;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f6f7f9;
+    --bg-1: #ffffff;
+    --bg-2: #f0f2f5;
+    --bg-3: #e6e9ee;
+    --line: #dde1e6;
+    --line-2: #cbd1d9;
+    --fg: #1d2229;
+    --fg-1: #4b535e;
+    --fg-2: #848c97;
+    --accent: #1f6feb;
+    --accent-bg: #dbe9ff;
+    --ok: #1a7f37;
+    --warn: #9a6700;
+    --err: #cf222e;
+    --fatal: #8250df;
+    --debug: #0969da;
+    --sel: #e3eefc;
+    color-scheme: light;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html, body, #app { height: 100%; margin: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font: var(--fs)/1.4 var(--font);
+  overflow: hidden;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono, code, pre, input.mono { font-family: var(--mono); font-size: var(--fs-s); }
+.dim { color: var(--fg-1); }
+.faint { color: var(--fg-2); }
+.selectable { user-select: text; }
+
+button, input, select, textarea { font: inherit; color: inherit; }
+
+button {
+  display: inline-flex; align-items: center; gap: 5px;
+  height: 24px; padding: 0 8px;
+  background: var(--bg-2); border: 1px solid var(--line-2); border-radius: var(--r);
+  cursor: pointer; white-space: nowrap;
+}
+button:hover:not(:disabled) { background: var(--bg-3); }
+button:disabled { opacity: .45; cursor: default; }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+button.primary:hover:not(:disabled) { filter: brightness(1.08); background: var(--accent); }
+button.ghost { background: transparent; border-color: transparent; }
+button.ghost:hover:not(:disabled) { background: var(--bg-3); }
+button.danger { color: var(--err); }
+button.icon { width: 24px; padding: 0; justify-content: center; }
+
+input, select, textarea {
+  height: 24px; padding: 0 7px;
+  background: var(--bg); border: 1px solid var(--line-2); border-radius: var(--r);
+  outline: none; user-select: text;
+}
+textarea { height: auto; padding: 6px 7px; resize: vertical; }
+input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+input[type="checkbox"] { height: auto; accent-color: var(--accent); margin: 0; }
+
+label.field { display: grid; gap: 3px; color: var(--fg-1); font-size: var(--fs-s); }
+
+.dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; flex: none; background: var(--fg-2); }
+.dot.ok { background: var(--ok); }
+.dot.warn { background: var(--warn); }
+.dot.err { background: var(--err); }
+.dot.busy { background: var(--accent); animation: pulse 1s infinite; }
+@keyframes pulse { 50% { opacity: .35; } }
+
+.badge {
+  display: inline-flex; align-items: center; height: 17px; padding: 0 5px;
+  border: 1px solid var(--line-2); border-radius: 3px;
+  font-size: 10.5px; color: var(--fg-1); text-transform: uppercase; letter-spacing: .02em;
+}
+.badge.on { color: var(--accent); border-color: var(--accent); }
+
+.seg { display: inline-flex; border: 1px solid var(--line-2); border-radius: var(--r); overflow: hidden; }
+.seg button { border: 0; border-radius: 0; height: 22px; background: transparent; }
+.seg button + button { border-left: 1px solid var(--line-2); }
+.seg button.active { background: var(--accent-bg); color: var(--accent); }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 5px; border: 2px solid var(--bg); }
+::-webkit-scrollbar-corner { background: transparent; }

@@ -1,0 +1,87 @@
+# ─── Build output ────────────────────────────────────────────────────────────
+bin/
+dist/
+frontend/dist/
+*.exe
+*.syso
+*.msix
+*.appx
+build/.icon.icns
+build/windows/nsis/MicrosoftEdgeWebview2Setup.exe
+.task/
+
+# ─── Dependencies ────────────────────────────────────────────────────────────
+node_modules/
+vendor/
+
+# ─── Go / test artifacts ─────────────────────────────────────────────────────
+*.test
+*.out
+*.prof
+coverage.*
+cover.html
+
+# ─── Secrets & credentials (never commit) ────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.mobileprovision
+adbkey
+adbkey.pub
+secrets.*
+credentials.*
+*.secret
+*.token
+.npmrc.local
+# Local adbridge runtime data, should it ever be copied into the tree
+config.json
+devices.json
+audit-*.jsonl
+uploads/
+recordings/
+
+# ─── AI assistant instructions, prompts & local agent state ─────────────────
+AGENT.md
+AGENTS.md
+CLAUDE.md
+CLAUDE.local.md
+GEMINI.md
+.claude/
+.cursor/
+.cursorrules
+.cursorignore
+.windsurfrules
+.clinerules
+.continue/
+.aider*
+.codex/
+.gemini/
+.copilot/
+.github/copilot-instructions.md
+.github/instructions/
+.github/prompts/
+.mcp.json
+*.prompt.md
+prompts/
+
+# ─── Logs ────────────────────────────────────────────────────────────────────
+*.log
+logs/
+npm-debug.log*
+
+# ─── OS / editors ────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*~

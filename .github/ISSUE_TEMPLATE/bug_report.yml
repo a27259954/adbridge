@@ -1,0 +1,45 @@
+name: Bug report
+description: Something does not work as documented
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please do **not** paste your MCP token, ngrok authtoken or `config.json` contents. Security issues go through private reporting (see docs/SECURITY.md).
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, what happened instead.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: adbridge version
+      description: Shown at the bottom of Settings.
+      placeholder: v0.1.3
+    validations:
+      required: true
+  - type: input
+    id: adb
+    attributes:
+      label: adb version
+      description: Shown in the status bar, or `adb version`.
+      placeholder: 37.0.1
+  - type: input
+    id: device
+    attributes:
+      label: Phone and Android version
+      placeholder: Pixel 8, Android 15
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options: [Connection / pairing, MCP tools, Tunnel, UI, Other]
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Relevant lines from `%LOCALAPPDATA%\adbridge\logs\app.log`. Check them for secrets before pasting.
+      render: text
