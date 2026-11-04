@@ -57,9 +57,19 @@ func (s *Server) OnSocket(spec string, fn func(net.Conn)) {
 // New starts a fake server on a random loopback port; it is closed via t.Cleanup.
 func New(t testing.TB) *Server {
 	t.Helper()
-	ln, err := net.Listen("tcp", "127.0.0.1:0")
+	s, err := Start()
 	if err != nil {
 		t.Fatal(err)
+	}
+	t.Cleanup(s.Close)
+	return s
+}
+
+// Start starts a fake server outside tests (e.g. the demo build). Call Close when done.
+func Start() (*Server, error) {
+	ln, err := net.Listen("tcp", "127.0.0.1:0")
+	if err != nil {
+		return nil, err
 	}
 	s := &Server{
 		ln:      ln,
@@ -68,9 +78,11 @@ func New(t testing.TB) *Server {
 		sockets: map[string]func(net.Conn){},
 	}
 	go s.serve()
-	t.Cleanup(func() { ln.Close() })
-	return s
+	return s, nil
 }
+
+// Close stops accepting connections.
+func (s *Server) Close() { s.ln.Close() }
 
 func (s *Server) Addr() string { return s.ln.Addr().String() }
 

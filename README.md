@@ -86,6 +86,8 @@ Cloud sandboxes and hosted assistants can only call an HTTPS URL. adbridge gives
 2. Click **Start tunnel**. Copy the remote config (it uses an `Authorization: Bearer` header) or the **Secret URL** (`…/mcp/<token>`, for clients that cannot set headers).
 3. Remote clients start at the **read** level. Raise the level only while you need it.
 
+<p align="center"><img src="docs/assets/screenshot-mcp.png" width="820" alt="MCP tab: endpoint, tunnel, permission levels and the live AI activity log"></p>
+
 With `full`, a remote agent can run the whole loop on its own:
 
 ```text

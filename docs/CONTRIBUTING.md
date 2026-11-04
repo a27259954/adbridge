@@ -17,6 +17,16 @@ wails3 dev
 wails3 task check
 ```
 
+### Demo build (no phones needed)
+
+This build is for UI work and screenshots:
+
+```bash
+wails3 task build EXTRA_TAGS=demo
+```
+
+The resulting exe talks to an in-process fake adb server with three phones (USB + Wi-Fi, Wi-Fi, and mDNS), a live logcat stream that includes a crash, and a recorded AI session in the activity log. All of its state lives in a temporary folder, so your real settings, devices and logs are never touched. Set `ADBRIDGE_LANG` (for example `zh-TW`) to pick the UI language. Close any running adbridge first, because only one instance runs at a time. The images in `docs/assets/` were made this way. The demo code (`internal/app/demo.go`) is excluded from normal builds.
+
 ## Layout rules
 
 - Only `internal/app` (and `main.go`) may import Wails. Core packages (`adb`, `device`, `mcpsrv`, `tunnel`, `pairing`, `audit`, `config`) must stay framework-free and testable.

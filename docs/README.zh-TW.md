@@ -6,6 +6,8 @@
 
 [English](../README.md)
 
+<p align="center"><img src="assets/screenshot.png" width="860" alt="adbridge 主畫面"></p>
+
 ## 功能
 
 - **以無線為主，也支援 USB**：可以用 QR code 配對（Android 11+）、用 6 位數配對碼配對、直接連 `ip:port`，或把 USB 裝置一鍵切到 Wi-Fi（所有 Android 版本都適用）。

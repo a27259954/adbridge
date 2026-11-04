@@ -55,7 +55,7 @@ func main() {
 		Assets:      application.AssetOptions{Handler: application.AssetFileServerFS(assets)},
 		Windows: application.WindowsOptions{
 			// Keep WebView2 data out of the exe's folder.
-			WebviewUserDataPath: paths.WebviewDir(),
+			WebviewUserDataPath: core.WebviewDir(),
 		},
 		SingleInstance: &application.SingleInstanceOptions{
 			UniqueID:               "io.github.a27259954.adbridge",

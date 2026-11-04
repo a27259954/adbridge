@@ -52,9 +52,39 @@ type Core struct {
 	Tunnel  *tunnel.Manager
 
 	adbErr   error
+	store    storage
 	cancel   context.CancelFunc
 	stopOnce sync.Once
 }
+
+// storage is where the core keeps state. The demo build swaps all of it for
+// a throwaway directory so screenshots never touch real user data.
+type storage struct {
+	config, devices, logs, uploads, recordings, webview string
+}
+
+func defaultStorage() storage {
+	return storage{
+		config:     paths.ConfigFile(),
+		devices:    paths.DevicesFile(),
+		logs:       paths.LogDir(),
+		uploads:    paths.UploadsDir(),
+		recordings: paths.RecordingsDir(),
+		webview:    paths.WebviewDir(),
+	}
+}
+
+// demoMode is implemented in demo.go, compiled only with -tags demo: it runs
+// adbridge against an in-process fake adb server with three phones.
+type demoMode interface {
+	setup() (adbAddr string, st storage, err error)
+	start(c *Core)
+}
+
+var demo demoMode
+
+// WebviewDir is the WebView2 user data folder.
+func (c *Core) WebviewDir() string { return c.store.webview }
 
 func emit(name string, data any) {
 	if a := application.Get(); a != nil {
@@ -64,23 +94,33 @@ func emit(name string, data any) {
 
 // NewCore builds the component graph. Nothing runs until Start.
 func NewCore(version string, log *slog.Logger) (*Core, error) {
-	cfg, err := config.Open(paths.ConfigFile())
+	st, adbAddr := defaultStorage(), ""
+	if demo != nil {
+		var err error
+		if adbAddr, st, err = demo.setup(); err != nil {
+			return nil, err
+		}
+	}
+	cfg, err := config.Open(st.config)
 	if err != nil {
 		return nil, err
 	}
-	c := &Core{Version: version, Log: log, Config: cfg}
+	c := &Core{Version: version, Log: log, Config: cfg, store: st}
 
 	bin, err := adb.Locate(cfg.Get().ADBPath)
 	c.adbErr = err
 	c.ADB = adb.New(bin)
+	if adbAddr != "" {
+		c.ADB.Addr = adbAddr
+	}
 
-	c.Devices, err = device.New(c.ADB, paths.DevicesFile(), log)
+	c.Devices, err = device.New(c.ADB, st.devices, log)
 	if err != nil {
 		return nil, err
 	}
 	c.Pairing = pairing.New(c.Devices, func(s pairing.Status) { emit(EvPairing, s) })
-	c.Audit = audit.New(paths.LogDir())
-	stage, err := staging.Open(paths.UploadsDir())
+	c.Audit = audit.New(st.logs)
+	stage, err := staging.Open(st.uploads)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +128,7 @@ func NewCore(version string, log *slog.Logger) (*Core, error) {
 	var tun *tunnel.Manager
 	c.MCP = mcpsrv.New(mcpsrv.Deps{
 		Devices: c.Devices, Config: cfg, Audit: c.Audit, Version: version, Log: log,
-		Staging: stage, RecordDir: paths.RecordingsDir(),
+		Staging: stage, RecordDir: st.recordings,
 		OnRemote: func() { tun.Touch() },
 	})
 	tun = tunnel.New(cfg, c.MCP.RemoteHandler(), log, func(s tunnel.Status) { emit(EvTunnel, s) })
@@ -107,6 +147,9 @@ func (c *Core) Start() {
 		c.Log.Error("mcp server failed to start", "err", err)
 	}
 	emit(EvMCP, c.MCP.Status())
+	if demo != nil {
+		go demo.start(c)
+	}
 }
 
 // Stop shuts everything down.
