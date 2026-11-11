@@ -11,7 +11,7 @@
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "dependencies": {
-    "@lucide/svelte": "^1.68.0",
+    "@lucide/svelte": "^1.70.0",
     "@wailsio/runtime": "^3.1.0"
   },
   "devDependencies": {
@@ -21,6 +21,6 @@
     "svelte-check": "^4.4.8",
     "tslib": "^2.6.2",
     "typescript": "^5.2.2",
-    "vite": "^8.0.5"
+    "vite": "^8.3.6"
   }
 }
