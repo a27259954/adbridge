@@ -8,7 +8,7 @@ require (
 	github.com/wailsapp/wails/v3 v3.0.0-beta.28
 	golang.ngrok.com/ngrok/v2 v2.4.0
 	golang.org/x/image v0.47.0
-	golang.org/x/sys v0.49.0
+	golang.org/x/sys v0.50.0
 )
 
 require (
