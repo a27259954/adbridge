@@ -58,7 +58,7 @@ adbridge is a single `adbridge.exe` for Windows. It needs only Android SDK Platf
 
 ## Quick start
 
-1. **Download** [`adbridge.exe`](https://github.com/a27259954/adbridge/releases/latest/download/adbridge.exe) and run it.
+1. **Download** `adbridge-vX.Y.Z.exe` from the [latest release](https://github.com/a27259954/adbridge/releases/latest) and run it.
 2. **Connect a phone.** Use one of these:
    - **Pair QR:** On the phone, go to *Developer options → Wireless debugging → Pair device with QR code* and scan.
    - **USB:** Plug in the phone and accept the RSA prompt. Then choose **⋯ → Switch USB → Wi-Fi** to cut the cable.
@@ -187,7 +187,7 @@ It is stored in plain text in `%APPDATA%\adbridge\config.json`, which only your 
 <details>
 <summary><b>Windows SmartScreen warns about the exe.</b></summary>
 
-Release builds are not code-signed yet. Check the file against the `adbridge.exe.sha256` published with each release, then choose *More info → Run anyway*.
+Release builds are not code-signed yet. Check the file against the `.sha256` file published next to it, then choose *More info → Run anyway*.
 </details>
 
 ## Building from source

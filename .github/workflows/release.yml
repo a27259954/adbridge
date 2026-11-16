@@ -83,17 +83,23 @@ jobs:
           $j = Get-Content $p -Raw | ConvertFrom-Json
           $j.fixed.file_version = $v
           $j.info.'0000'.ProductVersion = $v
+          $j.info.'0000' | Add-Member -NotePropertyName FileVersion -NotePropertyValue $v -Force
           $j | ConvertTo-Json -Depth 5 | Set-Content $p -Encoding utf8
 
       - name: Build adbridge.exe
         run: wails3 task build "EXTRA_LDFLAGS=-X main.version=v${{ steps.version.outputs.version }}"
 
-      - name: Checksum
+      # The published file carries the version in its name: adbridge-v0.1.2.exe
+      - name: Package and checksum
+        id: pkg
         shell: pwsh
         run: |
-          $h = (Get-FileHash bin/adbridge.exe -Algorithm SHA256).Hash.ToLower()
-          "$h  adbridge.exe" | Out-File -Encoding ascii bin/adbridge.exe.sha256
-          "SHA-256: ``$h``" >> $env:GITHUB_STEP_SUMMARY
+          $name = "adbridge-v${{ steps.version.outputs.version }}.exe"
+          Copy-Item bin/adbridge.exe "bin/$name"
+          $h = (Get-FileHash "bin/$name" -Algorithm SHA256).Hash.ToLower()
+          "$h  $name" | Out-File -Encoding ascii "bin/$name.sha256"
+          "name=$name" >> $env:GITHUB_OUTPUT
+          "$name SHA-256: ``$h``" >> $env:GITHUB_STEP_SUMMARY
 
       # gh (preinstalled on runners) instead of a third-party action: one less
       # dependency with write access, and we control retries. GitHub's
@@ -104,9 +110,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: v${{ steps.version.outputs.version }}
+          ASSET: ${{ steps.pkg.outputs.name }}
         run: |
-          $files = @('bin/adbridge.exe', 'bin/adbridge.exe.sha256')
-          $fallback = "Automated build of $env:GITHUB_SHA.`n`nDownload ``adbridge.exe`` and verify it with ``adbridge.exe.sha256``."
+          $files = @("bin/$env:ASSET", "bin/$env:ASSET.sha256")
+          $fallback = "Automated build of $env:GITHUB_SHA.`n`nDownload ``$env:ASSET`` and verify it with ``$env:ASSET.sha256``."
           for ($i = 1; $i -le 4; $i++) {
             gh release view $env:TAG *> $null
             if ($LASTEXITCODE -eq 0) {

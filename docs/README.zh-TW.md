@@ -25,7 +25,7 @@
 
 ## 快速開始
 
-1. 從 [Releases](https://github.com/a27259954/adbridge/releases/latest) 下載 `adbridge.exe` 並執行。
+1. 從 [Releases](https://github.com/a27259954/adbridge/releases/latest) 下載 `adbridge-vX.Y.Z.exe` 並執行。
 2. 連接手機：
    - **QR 配對**：在手機上進入「開發人員選項 → 無線偵錯 → 使用 QR code 配對裝置」，然後在 adbridge 按 **Pair QR** 掃描畫面上的 QR code。
    - **USB**：插上 USB 線並在手機上允許 RSA 授權。想改成無線的話，點 **⋯ → Switch USB → Wi-Fi**。
@@ -58,7 +58,7 @@
 
 ## 檔案位置
 
-發佈的只有 `adbridge.exe`。程式寫入的所有東西都放在使用者目錄底下：
+發佈的只有單一執行檔 `adbridge-vX.Y.Z.exe`。程式寫入的所有東西都放在使用者目錄底下：
 
 | 路徑 | 內容 |
 |---|---|

@@ -43,7 +43,7 @@ The resulting exe talks to an in-process fake adb server with three phones (USB 
 
 ## Releases
 
-Releases are automatic. Every push to `main` that touches code runs `.github/workflows/release.yml`, which tests the commit, builds `adbridge.exe` and publishes a GitHub release with a SHA-256 checksum.
+Releases are automatic. Every push to `main` that touches code runs `.github/workflows/release.yml`, which tests the commit, builds `adbridge-v<version>.exe` (the version is in the file name and in its Properties → Details) and publishes a GitHub release with a SHA-256 checksum.
 
 - **Version:** `v<VERSION>.<n>`. `VERSION` holds the minor line (for example `0.1`), and `n` counts up from the existing tags (`v0.1.0`, `v0.1.1`, …). Edit `VERSION` to start a new line (`0.2` → `v0.2.0`).
 - **Skipped automatically:** pushes that only change Markdown, `docs/`, `LICENSE` or issue templates.
