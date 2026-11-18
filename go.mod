@@ -6,9 +6,9 @@ require (
 	github.com/modelcontextprotocol/go-sdk v1.8.0
 	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e
 	github.com/wailsapp/wails/v3 v3.0.0-beta.28
-	golang.ngrok.com/ngrok/v2 v2.4.0
-	golang.org/x/image v0.47.0
-	golang.org/x/sys v0.49.0
+	golang.ngrok.com/ngrok/v2 v2.6.0
+	golang.org/x/image v0.48.0
+	golang.org/x/sys v0.50.0
 )
 
 require (
